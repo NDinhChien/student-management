@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Danh Sách Lớp</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header_sidebar">
+                <div class="header__sidebar-left">
+                    <p id="user">User: <span>Duy anh</span></p>
+                    <p id="today">Today: <span>03-10-2022</span></p>
+                </div>
+                <div class="header__sidebar-right">
+
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="menu-title">
+                        <a href="#">MENU</a>
+                    </li>
+                    <li>
+                        <a href="#">Danh Sách Sinh Viên</a>
+                    </li>
+                    <li class = "active">
+                        <a href="#">Danh Sách Lớp</a>
+                    </li>
+                    <li>
+                        <a href="#">Bảng Điểm Môn Học</a>
+                    </li>
+                    <li>
+                        <a href="#">Báo Cáo Tổng Kết Môn</a>
+                    </li>
+                    <li>
+                        <a href="#">Báo Cáo Tổng Kết Học Kì</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="header">
+                <h1>STUDENT SYSTEM MANAGER</h1>
+            </div>
+            <div class="class-title">
+                <p>Danh Sách Lớp</p>
+                <span>Thông tin lớp học</span>
+            </div>
+            <div class="select">
+              <span>Chọn lớp : </span>
+              <select name="" class="select-class">
+                <option value="10A1">Lớp 10A1</option>
+                <option value="10A2">Lớp 10A2</option>
+                <option value="10A3">Lớp 10A3</option>
+                <option value="11A1">Lớp 11A1</option>
+                <option value="11A2">Lớp 11A2</option>
+                <option value="11A3">Lớp 11A3</option>
+                <option value="12A1">Lớp 12A1</option>
+                <option value="12A2">Lớp 12A2</option>
+              </select>
+              <button>Xem</button>
+            </div>
+            <div class="main-content">
+                <div class="main-content__info">
+                    <div class="main-content__info-top">
+
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;height:30px;" colspan="3">   Lớp: <span>................</span></th>
+                                    <th style="text-align:left;height:30px;" colspan="3">   Sĩ số: <span>................</span></th>
+                                </tr>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Họ tên</th>
+                                    <th>Giới tính</th>
+                                    <th>Năm sinh</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Tac vụ</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>CSDLNC 20-1</td>
+                                    <td>HTTT</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>002</td>
+                                    <td>CSDLNC 20-1</td>
+                                    <td>HTTT</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td>CSDLNC 20-1</td>
+                                    <td>HTTT</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>Cơ sở dữ liệu</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                    <div class="main-content__info-bottom">
+                        <div class="info__bottom-content">
+                            <div class="box">
+                                <label for="">STT</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Họ Tên</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Giới Tính</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Năm Sinh</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                              <label for="">Địa Chỉ</label>
+                              <input type="text" name="" id="">
+                          </div>
+                        </div>
+                        <div class="main-content__action">
+                            <button><i class="fa-solid fa-circle-plus"></i>Add</button>
+                            <button><i class="fa-solid fa-pen"></i>Update</button>
+                            <button><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
