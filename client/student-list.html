@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/student-list/student-list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Danh sách học sinh</title>
+</head>
+
+<body style="box-sizing: border-box;">
+    <div class="container">
+        <div class="sidebar">
+            <div class="header_sidebar">
+                <div class="header__sidebar-left">
+                    <p id="user">User: <span>Duy anh</span></p>
+                    <p id="today">Today: <span>03-10-2022</span></p>
+                </div>
+                <div class="header__sidebar-right">
+
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="menu-title">
+                        <a href="#">MENU</a>
+                    </li>
+                    <li class = "active">
+                        <a href="#">Danh Sách Sinh Viên</a>
+                    </li>
+                    <li>
+                      <a href="./class-list.html">Danh Sách Lớp</a>
+                    </li>
+                    <li>
+                        <a href="./subject-score-table.html">Bảng Điểm Môn Học</a>
+                    </li>
+                    <li>
+                        <a href="./subject-report.html">Báo Cáo Tổng Kết Môn</a>
+                    </li>
+                    <li>
+                        <a href="./semester-report.html">Báo Cáo Tổng Kết Học Kì</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-container" style="height: auto;">
+            <div class="header">
+                <h1>STUDENT SYSTEM MANAGER</h1>
+            </div>
+            <div class="class-title">
+                <p>Danh Sách Học Sinh</p>
+                <span></span>
+            </div>
+            <div class="select">
+              <button id="all-stu-btn">Xem</button>
+              <button onclick="displayAddStuForm()" style="margin-right: 200px;">Thêm học sinh</button>
+              <input type="text" id="srch-stu-input" placeholder="Nhập mã học sinh..."/>
+              <button id="srch-stu-btn"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="main-content" style="height: auto;">
+                <div class="main-content__info">
+                    <div class="main-content__info-top">
+
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã số</th>
+                                    <th>Họ tên</th>
+                                    <th>Lớp</th>
+                                    <th>TB Học Kỳ 1</th>
+                                    <th>TB Học Kỳ 2</th>
+                                    <th>Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stu-table-tbody">            
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <form class="main-content__info-bottom" id="stu-form" style="display: none; height: 350px; border-color: rgb(68, 63, 63);">
+                        <div class="info__bottom-content">
+                            <div class="box" id="idInput">
+                                <label for="mahs">Mã Học sinh</label>
+                                <input type="text" id="mahs"/>
+                            </div>
+                            <div class="box">
+                                <label for="hoten">Họ tên</label>
+                                <input type="text" id="hoten"/>
+                            </div>
+                            <div class="box">
+                                <label for="gtinh">Giới tính</label>
+                                <select id="gtinh">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="box">
+                                <label for="ngsinh">Ngày sinh</label>
+                                <input type="date" id="ngsinh"/>
+                            </div>
+                            <div class="box">
+                                <label for="diachi">Địa chỉ</label>
+                                <input type="text" id="diachi"/>
+                            </div>
+                            <div class="box">
+                                <label for="email">Email</label>
+                                <input type="email" id="email"/>
+                            </div>
+                            <div class="box" id="lopInput">
+                                <label for="lop">Lớp</label>
+                                <select id="lop" style="float:right;">
+                                    <option value="NULL">NULL</option>
+                                    <option value="10A1">10A1</option>
+                                    <option value="10A2">10A2</option>
+                                    <option value="10A3">10A3</option>
+                                    <option value="10A4">10A4</option>
+                                    <option value="11A1">11A1</option>
+                                    <option value="11A2">11A2</option>
+                                    <option value="11A3">11A3</option>
+                                    <option value="12A1">12A1</option>
+                                    <option value="12A2">12A2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="main-content__action" style="margin-top: 10px;">
+                            <button id="add-stu-btn" style="padding: 5px 0;"><i class="fa-solid fa-circle-plus"></i>Thêm</button>
+                            <button id="update-stu-btn"><i class="fa-solid fa-pen"></i>Cập nhật</button>
+                            <input type="reset" value='Làm mới' style="padding: 5px 0;">
+                        </div>
+                        <div id="inform-result">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./pages/student-list/student-list.js"> </script>
+</body>
+
+</html>

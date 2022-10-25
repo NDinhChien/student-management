@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="subject_score_table.css">
+    <link rel="stylesheet" href="./pages/student-score-table/subject-score-table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Danh Sách Lớp</title>
+    <title>Bảng điểm</title>
 </head>
 
 <body>
@@ -30,19 +30,19 @@
                         <a href="#">MENU</a>
                     </li>
                     <li>
-                        <a href="#">Danh Sách Sinh Viên</a>
-                    </li>
-                    <li >
-                        <a href="#">Danh Sách Lớp</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">Bảng Điểm Môn Học</a>
+                        <a href="./student-list.html">Danh Sách Sinh Viên</a>
                     </li>
                     <li>
-                        <a href="#">Báo Cáo Tổng Kết Môn</a>
+                        <a href="./class-list.html">Danh Sách Lớp</a>
+                    </li>
+                    <li class = "active">
+                        <a href="./subject-score-table.html">Bảng Điểm Môn Học</a>
                     </li>
                     <li>
-                        <a href="#">Báo Cáo Tổng Kết Học Kì</a>
+                        <a href="./subject-report.html">Báo Cáo Tổng Kết Môn</a>
+                    </li>
+                    <li>
+                        <a href="./semester-report.html">Báo Cáo Tổng Kết Học Kì</a>
                     </li>
                 </ul>
             </div>
@@ -115,6 +115,7 @@
                                     <th>Điểm 15'</th>
                                     <th>Điểm 1 tiết</th>
                                     <th>Điểm cuối HK</th>
+                                    <th>Tác vụ</th>
                                 </tr>
                             </thead>
 
@@ -125,6 +126,12 @@
                                     <td>8đ</td>
                                     <td>9đ</td>
                                     <td>8.5đ</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>002</td>
@@ -132,6 +139,12 @@
                                     <td>8đ</td>
                                     <td>9đ</td>
                                     <td>8.5đ</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>003</td>
@@ -139,10 +152,46 @@
                                     <td>8đ</td>
                                     <td>9đ</td>
                                     <td>8.5đ</td>
+                                    <td>
+                                        <ul class="action">
+                                            <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="main-content__info-bottom">
+                        <div class="info__bottom-content">
+                            <div class="box">
+                                <label for="">STT</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Họ Tên</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Điểm 15p</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                                <label for="">Điểm 1 tiết</label>
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box">
+                              <label for="">Điểm Cuối HK</label>
+                              <input type="text" name="" id="">
+                          </div>
+                        </div>
+                        <div class="main-content__action">
+                            <button><i class="fa-solid fa-circle-plus"></i>Add</button>
+                            <button><i class="fa-solid fa-pen"></i>Update</button>
+                            <button><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
