@@ -1,3 +1,4 @@
+// thông tin TK và DB: server sẽ kết nối với DB dùng TK này
 const USERNAME="dchien";
 const PASSWORD="dchien172229";
 const DATABASE="qlhocsinh3";
@@ -40,6 +41,20 @@ class DbService {
             console.log(error);
         }
     }
+    async detailStuInfo(mahs) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = 'SELECT * FROM hocsinh WHERE MaHS=?;';
+                connection.query(query, [mahs], (err, result) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(result);
+                })
+            })
+            return response;
+        } catch(error) {
+            console.log(error);
+        }
+    }
     async addStuSchool(data) {
         try {
             const {HoTen, GioiTinh, NgaySinh, DiaChi, Email} = data;
@@ -60,9 +75,7 @@ class DbService {
         try {
             let setstr="";
             for (let x in data) {
-                if (data[x]!=="") {
-                    setstr += x + "='" + data[x] + "',";
-                }
+                setstr += x + "='" + data[x] + "',";
             }
             if (setstr==="") {
                 return true;

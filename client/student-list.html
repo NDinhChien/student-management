@@ -47,7 +47,7 @@
                 </ul>
             </div>
         </div>
-        <div class="right-container" style="height: auto;">
+        <div class="right-container" style="height:auto;">
             <div class="header">
                 <h1>STUDENT SYSTEM MANAGER</h1>
             </div>
@@ -58,13 +58,12 @@
             <div class="select">
               <button id="all-stu-btn">Xem</button>
               <button onclick="displayAddStuForm()" style="margin-right: 200px;">Thêm học sinh</button>
-              <input type="text" id="srch-stu-input" placeholder="Nhập mã học sinh..."/>
+              <input type="text" id="srch-stu-input" placeholder="Nhập mã số hoặc họ tên..."/>
               <button id="srch-stu-btn"><i class="fa fa-search"></i></button>
             </div>
             <div class="main-content" style="height: auto;">
-                <div class="main-content__info">
-                    <div class="main-content__info-top">
-
+                <div class="main-content__info" style="overflow:auto;">
+                    <div class="main-content__info-top" >
                         <table style="width:100%">
                             <thead>
                                 <tr>
@@ -80,7 +79,6 @@
                             <tbody id="stu-table-tbody">            
                             </tbody>
                         </table>
-
                     </div>
                     <form class="main-content__info-bottom" id="stu-form" style="display: none; height: 350px; border-color: rgb(68, 63, 63);">
                         <div class="info__bottom-content">
@@ -111,10 +109,10 @@
                                 <label for="email">Email</label>
                                 <input type="email" id="email"/>
                             </div>
-                            <div class="box" id="lopInput">
+                            <div class="box" id="classInput">
                                 <label for="lop">Lớp</label>
                                 <select id="lop" style="float:right;">
-                                    <option value="NULL">NULL</option>
+                                    <option value="">NULL</option>
                                     <option value="10A1">10A1</option>
                                     <option value="10A2">10A2</option>
                                     <option value="10A3">10A3</option>
@@ -128,9 +126,11 @@
                             </div>
                         </div>
                         <div class="main-content__action" style="margin-top: 10px;">
-                            <button id="add-stu-btn" style="padding: 5px 0;"><i class="fa-solid fa-circle-plus"></i>Thêm</button>
+                            <button id="add-stu-btn"><i class="fa-solid fa-circle-plus"></i>Thêm</button>
+                            <button id="edit-stu-btn" onclick="editableStuForm(event);" style="padding: 5px 0;"><i class="fa-solid fa-pen"></i>Sửa</button>
                             <button id="update-stu-btn"><i class="fa-solid fa-pen"></i>Cập nhật</button>
-                            <input type="reset" value='Làm mới' style="padding: 5px 0;">
+                            <input id ="reset-btn" type="reset" value='Làm mới' style="padding: 5px 0;">
+                            <button id="cancel-btn" type="button" onclick="document.querySelector('#stu-form').style.display='none';">Hủy </button>
                         </div>
                         <div id="inform-result">
                         </div>
