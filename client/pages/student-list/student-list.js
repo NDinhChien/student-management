@@ -99,6 +99,10 @@ function editableStuForm(event) {
     updateStuBtn.style.display = 'block';
     cancelBtn.style.display = 'block';
 }
+function resetStuForm(event) {
+    event.preventDefault();
+    stuForm.reset();
+}
 function isFormFullfilled() {
     const elements = document.querySelectorAll("#stu-form input");
     for (let x=1; x<elements.length; x++)  {
@@ -108,6 +112,7 @@ function isFormFullfilled() {
     }
     return true;
 }
+
 
 // Student Table
 const stuTableTbody = document.querySelector('#stu-table-tbody');

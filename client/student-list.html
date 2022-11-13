@@ -11,7 +11,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Danh sách học sinh</title>
 </head>
+<style>
+i {
+    background-color: gray;
+    color: black; 
+}
 
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom: 'none';
+}
+</style>
 <body style="box-sizing: border-box;">
     <div class="container">
         <div class="sidebar">
@@ -61,8 +73,8 @@
               <input type="text" id="srch-stu-input" placeholder="Nhập mã số hoặc họ tên..."/>
               <button id="srch-stu-btn"><i class="fa fa-search"></i></button>
             </div>
-            <div class="main-content" style="height: auto;">
-                <div class="main-content__info" style="overflow:auto;">
+            <div class="main-content" style="height: 400px; overflow: visible;">
+                <div class="main-content__info" >
                     <div class="main-content__info-top" >
                         <table style="width:100%">
                             <thead>
@@ -127,9 +139,9 @@
                         </div>
                         <div class="main-content__action" style="margin-top: 10px;">
                             <button id="add-stu-btn"><i class="fa-solid fa-circle-plus"></i>Thêm</button>
-                            <button id="edit-stu-btn" onclick="editableStuForm(event);" style="padding: 5px 0;"><i class="fa-solid fa-pen"></i>Sửa</button>
+                            <button id="edit-stu-btn" onclick="editableStuForm(event);"><i class="fa-solid fa-pen"></i>Sửa</button>
                             <button id="update-stu-btn"><i class="fa-solid fa-pen"></i>Cập nhật</button>
-                            <input id ="reset-btn" type="reset" value='Làm mới' style="padding: 5px 0;">
+                            <button id ="reset-btn" onclick="resetStuForm(event);">Làm mới</button> 
                             <button id="cancel-btn" type="button" onclick="document.querySelector('#stu-form').style.display='none';">Hủy </button>
                         </div>
                         <div id="inform-result">
