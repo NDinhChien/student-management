@@ -1,85 +1,64 @@
 // server sẽ chạy ở port này
-const PORT=5000;
+const serverConfig = require('./config/serverConfig');
 // khai báo express js app
 const express = require('express');
 const app = express();
-// cors cho phép kết nối DB dễ dàng hơn
+const mysql = require('mysql');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+
+const session = require("express-session")
+const mySQLStore = require("express-mysql-session")(session);
+const pool = require('./utils/getPool');
 const cors = require('cors');
 app.use(cors());
-// cho phép nhận xử lý dữ liệu Json và x-www-form-urlencoded
+app.use(cookieParser());
+// cho phép nhận xử lý dữ liệu json và x-www-form-urlencoded
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// dbService giống như DAL còn app.js giống như BUS  
-const dbService = require('./dbService');
-//
-app.get('/', (req, res) => {
-    res.status(200).send('<p>Welcome to our server!</p>')
-})
-// Lấy danh sách tất cả học sinh gửi cho client
-app.get('/all-stu-school', (request, response) => {
-    const db = dbService.getDbServiceInstance();
-    const result = db.allStuSchool();
+const dbConfig = require('./config/dbConfig');
+// const { send } = require('process');
+const options = {
+    host: dbConfig.HOST,
+    user: dbConfig.USERNAME,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DATABASE,
+    port: dbConfig.DB_PORT,
+    connectionLimit: 5
+}
 
-    result
-    .then(data =>response.json({data: data}))
-    .catch(error => console.log(error));
-})
-// Lấy thông tin chi tiết một học sinh cụ thể rồi gửi cho client
-app.get('/detail-stu-info/:id', (request, response) => {
-    const {id} = request.params;
-    
-    const db = dbService.getDbServiceInstance();
-    const result = db.detailStuInfo(id);
-    result
-    .then(data => {
-        response.json({data: data})
-    })
-    .catch(error => console.log(error));
-})
-// tìm một học sinh với mã số rồi gửi dữ liệu cho client
-app.get('/search-stu/:mahs', (request, response)=> {
-    const { mahs } = request.params;
-    
-    const db = dbService.getDbServiceInstance();
-    const result = db.searchStuById(mahs);
-    result
-    .then(data => response.json({data: data}))
-    .catch(error => console.log(error));
-})
-// Thêm một học sinh vào DB rồi gửi kết quả cho client
-app.post('/add-stu-school', (request, response) => {
-    const {data} = request.body;
+const storeOptions = {
+    expiration: 1000*60*15,
+    createDatabaseTable: true,
+    schema: {
+        tableName: 'sessiontb',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
+}
+let sessionStore = new mySQLStore(storeOptions, mysql.createPool(options));
 
-    const db = dbService.getDbServiceInstance();
-    const result = db.addStuSchool(data)
-    result
-    .then(data => response.json({success: data}))
-    .catch(error => console.log(error));
-})
-// Cập nhật thông tin chi tiết học sinh
-app.patch('/update-stu/:mahs', (request, response) => {
-    const { mahs } = request.params;
-    const { data } = request.body;
+app.use(session({
+    secret: 'xsowlneln323or3no2jrewojwslwenrs',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: true
+}))
 
-    const db = dbService.getDbServiceInstance();
-    const result = db.updateStuInfo(mahs, data);
-    result
-    .then(data => response.json({success: data}))
-    .catch(error => console.log(error));
-})
+const homeRoutes = require('./routes/home');
+const studentRoutes = require('./routes/student');
+const userRoutes = require('./routes/user');
+const classRoutes = require('./routes/class');
 
-// Xóa một học sinh khỏi DB
-app.delete('/delete-stu-school/:mahs', (request, response) => {
-    const {mahs} = request.params;
-
-    const db = dbService.getDbServiceInstance();
-    const result = db.deleteStuSchool(mahs);
-
-    result
-    .then(data => response.json({success: data}))
-    .catch(error => console.log(error));
-})
+app.use(homeRoutes);
+app.use(userRoutes);
+app.use(studentRoutes);
+app.use(classRoutes);
 
 // Chạy server
-app.listen(PORT, () => console.log('app is running'));
+app.listen(serverConfig.PORT, () => console.log('app is running'));
