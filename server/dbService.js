@@ -1,7 +1,7 @@
-const USERNAME="dchien";
-const PASSWORD="dchien172229";
+const USERNAME="root";
+const PASSWORD="hoaihcb1";
 const DATABASE="qlhocsinh3";
-const DB_PORT=3307;
+const DB_PORT=3306;
 const HOST="localhost";
 
 const mysql = require('mysql');
