@@ -54,7 +54,9 @@ const homeRoutes = require('./routes/home');
 const studentRoutes = require('./routes/student');
 const userRoutes = require('./routes/user');
 const classRoutes = require('./routes/class');
+const scoreRoutes = require('./routes/score');
 
+app.use(scoreRoutes);
 app.use(homeRoutes);
 app.use(userRoutes);
 app.use(studentRoutes);
