@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../../public/css/subject-score-table.css"> -->
-    <link rel="stylesheet" href="http://localhost:5000/css/subject-score-table.css">
+   
+    <link rel="stylesheet" href="http://localhost:5000/css/score.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,11 +40,9 @@
                         <a href="/score">Bảng Điểm Môn Học</a>
                     </li>
                     <li>
-                        <a href="/report">Báo Cáo Tổng Kết Môn</a>
+                        <a href="/report">Báo Cáo Tổng Kết</a>
                     </li>
-                    <li>
-                        <a href="/report">Báo Cáo Tổng Kết Học Kì</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -96,7 +94,7 @@
             <div class="main-content">
                 <div class="main-content__info">
                     <div class="main-content__info-top">
-                        <table style="width:100%">
+                        <table id='score-table' style="width:100%; display: none;">
                             <thead>
                                 <tr>
                                     <th style="text-align:left;height:30px;" colspan="2"> Lớp:
@@ -122,9 +120,7 @@
                                     <th>Tác vụ</th>
                                 </tr>
                             </thead>
-
                             <tbody id="score-table-content">
-                                
                             </tbody>
                         </table>
                     </div>

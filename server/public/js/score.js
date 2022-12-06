@@ -1,7 +1,11 @@
+const user = document.querySelector('#username');
+user.innerHTML = localStorage.getItem('username');
+const todayis = document.querySelector('#todayis');
+todayis.innerHTML = new Date().toISOString().substring(0, 10);
+
 let loadedTableName = "";
 let myCells;
-document.querySelector('#user').innerHTML = localStorage.getItem("username");
-document.querySelector('#todayis').innerHTML = new Date().toLocaleDateString();
+
 const subjectInput = document.querySelector('#subject-input');
 const classInput = document.querySelector('#class-input');
 const semesterInput = document.querySelector('#semester-input');
@@ -14,6 +18,7 @@ const updateScoreBtn = document.querySelector('#update-score-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const editModeBtn = document.querySelector('#edit-mode-btn');
 
+const scoreTable = document.querySelector('#score-table');
 const scoreTableContent = document.querySelector("#score-table-content");
 
 const stuScoreForm = document.querySelector("#stu-score-form");
@@ -22,6 +27,7 @@ const hoten = document.querySelector("#hoten");
 const d15p = document.querySelector("#d15p");
 const d1t = document.querySelector("#d1t");
 const thihk = document.querySelector("#thihk");
+
 
 function openEditForm(element) {
     let index = element.parentNode.parentNode.parentNode.rowIndex - 3;
@@ -84,6 +90,7 @@ function loadScoreTable(data) { //STT MaHS Diem15P Diem1T ThiCK
         stt += 1;
     })
     scoreTableContent.innerHTML = tablehtml;
+    scoreTable.style.display = 'block';
 }
 
 function updateStuScore() {

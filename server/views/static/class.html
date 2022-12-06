@@ -5,14 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../../public/css/class-list.css">  -->
-    <link rel="stylesheet" href="http://localhost:5000/css/class-list.css"> 
+    <link rel="stylesheet" href="http://localhost:5000/css/class.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Danh sách lớp</title>
 </head>
-
+<style>
+    #form-box input {
+        display: inline-block;
+        padding: 5px;   
+        box-sizing: border-box;
+        margin-right: 10px;
+    }
+    #form-box {
+        background-color: rgb(43, 224, 43);
+        border: 1px solid black;
+        top: 35%;
+        left: 45%;
+        position: fixed; 
+        z-index:1;
+    }
+    #form-box label {
+        display: inline-block;
+        width: 90px;
+        padding: 5px;
+        margin: 8px;
+    }
+    #closebtn {
+        float: right; 
+        color: red;
+        font-size: 40px;
+    }
+    #closebtn:hover {
+        opacity: 0.8;
+    }
+</style>
 <body>
     <div class="container" style="width:100%;">
         <div class="sidebar">
@@ -23,7 +51,6 @@
                     <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
                 </div>
                 <div class="header__sidebar-right">
-
                 </div>
             </div>
             <div class="menu">
@@ -32,7 +59,7 @@
                         <a href="#">MENU</a>
                     </li>
                     <li>
-                        <a href="/student">Danh Sách Sinh Viên</a>
+                        <a href="/student">Danh Sách Học Sinh</a>
                     </li>
                     <li class = "active">
                         <a href="/class">Danh Sách Lớp</a>
@@ -41,15 +68,12 @@
                         <a href="/score">Bảng Điểm Môn Học</a>
                     </li>
                     <li>
-                        <a href="/report">Báo Cáo Tổng Kết Môn</a>
-                    </li>
-                    <li>
-                        <a href="/report">Báo Cáo Tổng Kết Học Kì</a>
+                        <a href="/report">Báo Cáo Tổng Kết</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="right-container">
+        <div class="right-container" style="position: relative;">
             <div class="header">
                 <h1>Hệ Thống Quản Lý Học Sinh</h1>
             </div>
@@ -70,7 +94,7 @@
                 <option value="12A2">Lớp 12A2</option>
               </select>
               <button id="view-class-btn">Xem</button>
-              <button id="disp-stu-list-btn">Thêm học sinh</button>
+              <button id="disp-stu-list-btn" style="margin-left: 300px;">Thêm học sinh</button>
             </div>
             <div class="main-content" style="width:100%;">
                 <div class="main-content__info" style="width:100%;width:auto;">
@@ -116,10 +140,38 @@
                 </div>
 
             </div>
+            
+            <div id="form-box" style="display:none; opacity:1;"">
+                <div style=" height: 50px;">
+                    <p style="font-size: 25px; float: left;">Thông tin chi tiết</p>
+                    <span id="closebtn" title='Đóng' onclick="closeDetailInfo();">&times;</span>
+                </div>
+                <form id="detail-info-form" >
+                    <label for="ms"><b>Mã số</b></label>
+                    <input type="text" id="ms">
+                    <br>
+                    <label for="ht"><b>Họ tên</b></label>
+                    <input type="text" id="ht">
+                    <br>
+                    <label for="gt">Giới tính</label>
+                    <select id="gt">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <br>
+                    <label for="ns"><b>Ngày sinh</b></label>
+                    <input type="date" id="ns">
+                    <br>
+                    <label for="dc"><b>Địa chỉ</b></label>
+                    <input type="text" id="dc">
+                    <br>
+                    <label for="em"><b>Email</b></label>
+                    <input type="text" id="em">
+                </form>
+            </div> 
         </div>
     </div>
-    <script src="http://localhost:5000/js/class-list.js">
-        
+    <script src="http://localhost:5000/js/class.js">
     </script>
 </body>
 

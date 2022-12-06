@@ -1,10 +1,15 @@
 let stuData=[];                 // danh sách tất cả học sinh
 let stuInfo=[];                 // thông tin chi tiết học sinh đang xét
-let editInfo=[];                // thông tin mới học sinh đang xét 
+let editInfo=[];                
 let allowRefreshData = true;   
 const inform = document.querySelector('#inform');
+
+
+const todayis = document.querySelector('#todayis');
 const user = document.querySelector('#username');
 user.innerHTML = localStorage.getItem('username');
+todayis.innerHTML = new Date().toISOString().substring(0, 10);
+
 
 // các nút trên Student Form: thêm,cập nhật,... 
 const addStuBtn = document.querySelector('#add-stu-btn');
@@ -62,6 +67,7 @@ function displayDetailStuInfo(Mahs) {
     .then(response => response.json())
     .then(data => {
         stuInfo = data.data[0];
+        
         stuInfo.NgaySinh = new Date(stuInfo.NgaySinh).toISOString().substring(0, 10); // 'ngay-thang-nam'
         console.log(stuInfo);
         
@@ -105,6 +111,7 @@ function isFormFilled() {
     }
     return true;
 }
+
 // Student Table
 const stuTableContent = document.querySelector('#stu-table-content');
 // Hiển thị data trên StudentTable
@@ -161,7 +168,7 @@ function find(idOrName) {
     if (isId==true) {
         return stuData.filter((x)=>(x.MaHS===idOrName));
     }
-    return  stuData.filter((x)=>(x.HoTen===idOrName));
+    return stuData.filter((x)=>(x.HoTen.toLowerCase().includes(idOrName.toLowerCase())));
 }
 // cập nhật thông tin học sinh đã được chỉnh sửa trên stuData và Student Table
 function updateRowStuTable(Mahs, data) {    
@@ -198,16 +205,16 @@ function getAll() {
 }
 
 // Nút 'Tìm': Lấy dữ liệu học sinh từ DB dùng mã số  
-const srchStuBtn = document.querySelector('#srch-stu-btn');
-srchStuBtn.onclick = search; 
+const searchStuBtn = document.querySelector('#srch-stu-btn');
+searchStuBtn.onclick = search; 
 function search() {
     // lấy dữ liệu input
-    const id = document.querySelector('#srch-stu-input').value;
+    const stuInput = document.querySelector('#srch-stu-input').value; 
     // fetch
     if (stuData.length === 0) {
         allStuBtn.click();    
     }
-    loadStuTable(find(id))
+    loadStuTable(find(stuInput));
 }
 
 // Thêm học sinh vào DB
@@ -218,9 +225,7 @@ function insert(event) {
         inform.innerHTML= "<p style='color:red;'>Vui lòng nhập đủ thông tin!</p>";
         return;
     } 
-    // 
     const data = {
-        MaHS: mahs.value,
         HoTen: hoten.value,
         GioiTinh: gtinh.value,
         NgaySinh: ngsinh.value,
@@ -279,6 +284,7 @@ function update(event) {
             cancelBtn.style.display = 'none';
             editStuBtn.style.display = 'block';
             readonlyStuForm();
+            loadStuTable(stuData);
             updateRowStuTable(Mahs, editInfo);
         }
         else {
@@ -287,7 +293,6 @@ function update(event) {
         setTimeout(function(){ inform.innerHTML="";}, 3000);
     });
 }
-
 // Xóa một học sinh trên DB
 function remove(mahs) {
     fetch('http://localhost:5000/student/' + mahs, {
@@ -298,7 +303,8 @@ function remove(mahs) {
         if (data.success) {
             inform.innerHTML = "<p style='color:red;'>delete student succeeded!</p>";
             setTimeout(function(){ inform.innerHTML="";}, 3000);
-            deleteRowStuTable(mahs);
+            loadStuTable(stuData);
+            deleteRowStuTable(parseInt(mahs));
         }
         else {
             inform.innerHTML = "<p style='color:red;'>delete student failed!</p>";
