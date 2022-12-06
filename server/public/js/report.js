@@ -3,6 +3,7 @@ const user = document.querySelector('#username');
 user.innerHTML = localStorage.getItem('username');
 todayis.innerHTML = new Date().toISOString().substring(0, 10);
 
+const inform = document.querySelector('#inform');
 
 const subSelection = document.querySelector('#sub-selection');
 const semSelection = document.querySelector('#sem-selection');
@@ -33,7 +34,8 @@ function viewReport() {
                 document.querySelector('#hocki').innerHTML = semInput.value;
                 document.querySelector('#mon').innerHTML = subInput.value;
             } else {
-                console.log("Vui long nhap day du bang diem truoc khi xem bao cao!");
+                inform.innerHTML = "Vui long nhap day du bang diem truoc khi xem bao cao!";
+                setTimeout(()=> {inform.innerHTML="";}, 2500);
             }
         })
         .catch(error => console.log(error));
@@ -48,7 +50,8 @@ function viewReport() {
                 loadReport(data.data[0]);
                 document.querySelector('#hocki').innerHTML = semInput.value;
             } else {
-                console.log("Vui long nhap day du bang diem truoc khi xem bao cao!");
+                inform.innerHTML = "Vui long nhap day du bang diem truoc khi xem bao cao!";
+                setTimeout(()=> {inform.innerHTML="";}, 2500);
             }
         })
         .catch(error => console.log(error));
