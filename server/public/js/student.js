@@ -1,10 +1,17 @@
 let stuData=[];                 // danh sách tất cả học sinh
+let subData=[];
 let stuInfo=[];                 // thông tin chi tiết học sinh đang xét
-let editInfo=[];                // thông tin mới học sinh đang xét 
-let allowRefreshData = true;   
+let editInfo=[];                
+let allowRefreshData = true;
+let loadingSubData = false;
 const inform = document.querySelector('#inform');
+
+
+const todayis = document.querySelector('#todayis');
 const user = document.querySelector('#username');
 user.innerHTML = localStorage.getItem('username');
+todayis.innerHTML = new Date().toISOString().substring(0, 10);
+
 
 // các nút trên Student Form: thêm,cập nhật,... 
 const addStuBtn = document.querySelector('#add-stu-btn');
@@ -62,6 +69,7 @@ function displayDetailStuInfo(Mahs) {
     .then(response => response.json())
     .then(data => {
         stuInfo = data.data[0];
+        
         stuInfo.NgaySinh = new Date(stuInfo.NgaySinh).toISOString().substring(0, 10); // 'ngay-thang-nam'
         console.log(stuInfo);
         
@@ -105,6 +113,7 @@ function isFormFilled() {
     }
     return true;
 }
+
 // Student Table
 const stuTableContent = document.querySelector('#stu-table-content');
 // Hiển thị data trên StudentTable
@@ -135,18 +144,21 @@ function loadStuTable(data) {
     stuTableContent.innerHTML = tableHtml;
 }
 // Cập nhật số thứ tự trên Student Table khi xóa, thêm học sinh
-function updateSTT(index) {
-    for (let i=index; i<stuData.length; i++) {
+function updateSTT(index, data) {
+    for (let i=index; i<data.length; i++) {
         stuTableContent.rows[i].cells[0].innerHTML = i+1;
     }
 }
 // Xóa một học sinh trên Student Table
-function deleteRowStuTable(mahs) {
-    let i = stuData.findIndex((x) => (x.MaHS===mahs));
+function deleteRowStuTable(mahs, data) {
+    let i = data.findIndex((x) => (x.MaHS===mahs));
     if (i !== -1) {
-        stuData.splice(i, 1);
+        data.splice(i, 1);
         stuTableContent.deleteRow(i);
-        updateSTT(i);
+        updateSTT(i, subData);
+        if(loadingSubData) {
+            stuData.splice(stuData.findIndex((x) => (x.MaHS===mahs)), 1);
+        }
     }
 }
 // Tìm và lấy dữ liệu học sinh trong stuData dùng mã số hoặc họ tên
@@ -161,26 +173,36 @@ function find(idOrName) {
     if (isId==true) {
         return stuData.filter((x)=>(x.MaHS===idOrName));
     }
-    return  stuData.filter((x)=>(x.HoTen===idOrName));
+    subData = stuData.filter((x)=>(x.HoTen.toLowerCase().includes(idOrName.toLowerCase())));
 }
 // cập nhật thông tin học sinh đã được chỉnh sửa trên stuData và Student Table
-function updateRowStuTable(Mahs, data) {    
+function updateRowStuTable(Mahs, data, nData) {    
     if (!data.hasOwnProperty('HoTen') && !data.hasOwnProperty('Lop')) {
         return;
     }
-    let i = stuData.findIndex((x)=> (x.MaHS===Mahs));
+    
+    let i = nData.findIndex((x)=> (x.MaHS===Mahs));
     if (data.hasOwnProperty('HoTen')) {
-        stuData[i].HoTen = data.HoTen;
+        nData[i].HoTen = data.HoTen;
         stuInfo.HoTen = data.HoTen;
         stuTableContent.rows[i].cells[2].innerHTML = data.HoTen;
     }
     if (data.hasOwnProperty('Lop')) {
         stuTableContent.rows[i].cells[3].innerHTML = data.Lop;
-        stuData[i].Lop = data.Lop;
+        nData[i].Lop = data.Lop;
         stuInfo.Lop = data.Lop;
     }
+    if (loadingSubData) {
+        let i = stuData.findIndex((x)=> (x.MaHS===Mahs));
+        if (data.hasOwnProperty('HoTen')) {
+            stuData[i].HoTen = data.HoTen;
+        }
+        if (data.hasOwnProperty('Lop')) {
+            stuData[i].Lop = data.Lop;
+        }
+    }
 }
-// DB
+
 // Nút 'Xem': Lấy danh sách tất cả học sinh từ DB rồi hiển thị 
 const allStuBtn = document.querySelector('#all-stu-btn');
 allStuBtn.onclick = getAll;
@@ -195,19 +217,22 @@ function getAll() {
         })
     }
     loadStuTable(stuData);
+    loadingSubData = false;
 }
 
 // Nút 'Tìm': Lấy dữ liệu học sinh từ DB dùng mã số  
-const srchStuBtn = document.querySelector('#srch-stu-btn');
-srchStuBtn.onclick = search; 
+const searchStuBtn = document.querySelector('#srch-stu-btn');
+searchStuBtn.onclick = search; 
 function search() {
     // lấy dữ liệu input
-    const id = document.querySelector('#srch-stu-input').value;
+    const stu_input = document.querySelector('#srch-stu-input').value; 
     // fetch
     if (stuData.length === 0) {
         allStuBtn.click();    
     }
-    loadStuTable(find(id))
+    find(stu_input);
+    loadStuTable(subData);
+    loadingSubData = true;
 }
 
 // Thêm học sinh vào DB
@@ -218,9 +243,7 @@ function insert(event) {
         inform.innerHTML= "<p style='color:red;'>Vui lòng nhập đủ thông tin!</p>";
         return;
     } 
-    // 
     const data = {
-        MaHS: mahs.value,
         HoTen: hoten.value,
         GioiTinh: gtinh.value,
         NgaySinh: ngsinh.value,
@@ -279,7 +302,10 @@ function update(event) {
             cancelBtn.style.display = 'none';
             editStuBtn.style.display = 'block';
             readonlyStuForm();
-            updateRowStuTable(Mahs, editInfo);
+            if (loadingSubData) {
+                updateRowStuTable(Mahs, editInfo, subData);
+            }
+            else updateRowStuTable(Mahs, editInfo, stuData);
         }
         else {
             inform.innerHTML = "<p style='color:red;'>update student failed!</p>";
@@ -287,7 +313,6 @@ function update(event) {
         setTimeout(function(){ inform.innerHTML="";}, 3000);
     });
 }
-
 // Xóa một học sinh trên DB
 function remove(mahs) {
     fetch('http://localhost:5000/student/' + mahs, {
@@ -297,10 +322,14 @@ function remove(mahs) {
     .then(data => {
         if (data.success) {
             inform.innerHTML = "<p style='color:red;'>delete student succeeded!</p>";
-            setTimeout(function(){ inform.innerHTML="";}, 3000);
-            deleteRowStuTable(mahs);
+            if (loadingSubData) {
+                deleteRowStuTable(parseInt(mahs), subData);
+            }
+            else deleteRowStuTable(parseInt(mahs), stuData);
         }
         else {
             inform.innerHTML = "<p style='color:red;'>delete student failed!</p>";
-        }})
+        }
+        setTimeout(function(){ inform.innerHTML="";}, 3000);
+    })
 }

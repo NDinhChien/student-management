@@ -35,7 +35,7 @@ const logoutpage = (req, res) => {
 }
 const studentpage = (req, res) => {
     if (req.session && req.session.isAuth) {
-        res.sendFile(path.join(__dirname, '../views/static/student-list.html'));
+        res.sendFile(path.join(__dirname, '../views/static/student.html'));
     }
     else {
         res.redirect('/login');
@@ -43,7 +43,7 @@ const studentpage = (req, res) => {
 }
 const classpage = (req, res) => {
     if (req.session && req.session.isAuth) {
-        res.sendFile(path.join(__dirname, '../views/static/class-list.html'));
+        res.sendFile(path.join(__dirname, '../views/static/class.html'));
     }
     else {
         res.redirect('/login');
@@ -51,7 +51,7 @@ const classpage = (req, res) => {
 }
 const scorepage = (req, res) => {
     if (req.session && req.session.isAuth) {
-        res.sendFile(path.join(__dirname, '../views/static/subject-score-table.html'));
+        res.sendFile(path.join(__dirname, '../views/static/score.html'));
     }
     else {
         res.redirect('/login');
@@ -59,7 +59,7 @@ const scorepage = (req, res) => {
 }
 const reportpage = (req, res) => {
     if (req.session && req.session.isAuth) {
-        res.sendFile(path.join(__dirname, '../views/static/semester-report.html'));
+        res.sendFile(path.join(__dirname, '../views/static/report.html'));
     }
     else {
         res.redirect('/login');

@@ -3,7 +3,7 @@ const pool = require('../utils/getPool');
 const getAll = async ()=> {
     try {
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT hocsinh.MaHS, hocsinh.HoTen, hocsinh.Lop, diemtbhk.TBHK1, diemtbhk.TBHK2 FROM hocsinh INNER JOIN diemtbhk ON hocsinh.MaHS = diemtbhk.MaHS;";
+            const query = "SELECT tbhk.MaHS, hs.HoTen, tbhk.Lop, tbhk.TBHK1, tbhk.TBHK2 FROM (SELECT MaHS, HoTen FROM hocsinh) AS hs INNER JOIN diemtbhk AS tbhk ON hs.MaHS = tbhk.MaHS;";
             pool.query(query, (error, results) => {
                 if (error) reject(new Error(error.message));
                 resolve(results);
@@ -20,6 +20,7 @@ const getOne = async (mahs) => {
             const query = 'SELECT * FROM hocsinh WHERE MaHS=?;';
             pool.query(query, [mahs], (err, result) => {
                 if (err) reject(new Error(err.message));
+                // console.log(result);
                 resolve(result);
             })
         })
@@ -35,7 +36,7 @@ const insert = async (data) => {
             const query = "INSERT INTO hocsinh (HoTen, GioiTinh, NgaySinh, DiaChi, Email) VALUES (?, ?, ?, ?, ?);";
             pool.query(query, [HoTen, GioiTinh, NgaySinh, DiaChi, Email], (err, result) => {
                 if (err) reject(new Error(err.message));
-                //console.log(result.insertId);
+                
                 resolve(result.affectedRows);
             })
         });
@@ -57,6 +58,7 @@ const update = async (mahs, data) => {
         if (setstr==="") {
             return true;
         }
+        // console.log(setstr);
         const response = await new Promise((resolve, reject) => {
             const query = "UPDATE hocsinh SET " + setstr.slice(0, -1) + " WHERE MaHS = "+`${mahs};`;
             pool.query(query,(err, result) => {
@@ -74,7 +76,7 @@ const remove = async (mahs) => {
     try {
         const response = await new Promise((resolve, reject) => {
             const query = "DELETE FROM hocsinh WHERE MaHS = ?;";
-            pool.query(query,[mahs], (err, result) => {
+            pool.query(query,[parseInt(mahs)], (err, result) => {
                 if (err) reject(new Error(err.message));
                 resolve(result.affectedRows);
             })

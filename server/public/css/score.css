@@ -125,14 +125,14 @@
 }
 .container .right-container .main-content {
   padding: 10px;
-  width: 1189px;
+  /* width: 1189px; */
   margin-top: 5px;
   margin-left: 50px;
   background-color: rgb(189, 186, 186);
   display: flex;
 }
 .container .right-container .main-content .main-content__info {
-  width: 1180px;
+  /* width: 1180px; */
   height: 100%;
   display: flex;
   border: 1px solid gray;

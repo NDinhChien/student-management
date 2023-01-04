@@ -1,5 +1,5 @@
 // server sẽ chạy ở port này
-const serverConfig = require('./config/serverConfig');
+const PORT = 5000;
 // khai báo express js app
 const express = require('express');
 const app = express();
@@ -50,15 +50,19 @@ app.use(session({
     saveUninitialized: true
 }))
 
+const reportRoutes = require('./routes/report')
 const homeRoutes = require('./routes/home');
 const studentRoutes = require('./routes/student');
 const userRoutes = require('./routes/user');
 const classRoutes = require('./routes/class');
+const scoreRoutes = require('./routes/score');
 
+app.use(reportRoutes);
+app.use(scoreRoutes);
 app.use(homeRoutes);
 app.use(userRoutes);
 app.use(studentRoutes);
 app.use(classRoutes);
 
 // Chạy server
-app.listen(serverConfig.PORT, () => console.log('app is running'));
+app.listen(PORT, () => console.log('app is running'));

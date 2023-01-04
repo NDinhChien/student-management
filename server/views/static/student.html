@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
-    <link rel="stylesheet" href="http://localhost:5000/css/student-list.css">
+    <link rel="stylesheet" href="http://localhost:5000/css/student.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -31,7 +31,7 @@ th, td {
             <div class="header_sidebar">
                 <div class="header__sidebar-left">
                     <p id="user">Người dùng: <span id="username">Chien</span></p>
-                    <p id="today">Hôm nay: <span id="todayis">22-11-2022</span></p>
+                    <p id="today">Hôm nay: <span id="todayis"></span></p>
                     <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
                 </div>
                 <div class="header__sidebar-right">
@@ -44,7 +44,7 @@ th, td {
                         <a href="#">MENU</a>
                     </li>
                     <li class = "active">
-                        <a href="/student">Danh Sách Sinh Viên</a>
+                        <a href="/student">Danh Sách Học Sinh</a>
                     </li>
                     <li>
                       <a href="/class">Danh Sách Lớp</a>
@@ -53,10 +53,7 @@ th, td {
                         <a href="/score">Bảng Điểm Môn Học</a>
                     </li>
                     <li>
-                        <a href="/report">Báo Cáo Tổng Kết Môn</a>
-                    </li>
-                    <li>
-                        <a href="/report">Báo Cáo Tổng Kết Học Kì</a>
+                        <a href="/report">Báo Cáo Tổng Kết</a>
                     </li>
                 </ul>
             </div>
@@ -145,6 +142,7 @@ th, td {
                             <button id ="reset-btn" onclick="resetStuForm(event);">Làm mới</button> 
                             <button id="cancel-btn" type="button" onclick="document.querySelector('#stu-form').style.display='none';">Hủy </button>
                         </div>
+                        
                         <div id="inform">
                         </div>
                     </form>
@@ -152,7 +150,7 @@ th, td {
             </div>
         </div>
     </div>
-    <script src="http://localhost:5000/js/student-list.js"> 
+    <script src="http://localhost:5000/js/student.js"> 
     </script>
 </body>
 

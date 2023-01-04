@@ -7,8 +7,12 @@ const stuListContent = document.querySelector('#stu-list-content');
 const stuTable = document.querySelector('#stu-table');
 const className = document.querySelector('#class-name');
 const number = document.querySelector('#number');
+
+const todayis = document.querySelector('#todayis');
 const user = document.querySelector('#username');
 user.innerHTML = localStorage.getItem('username');
+todayis.innerHTML = new Date().toISOString().substring(0, 10);
+
 
 viewClassBtn.onclick = viewStuClass;
 function viewStuClass() {
@@ -41,7 +45,7 @@ function loadClassTable(data) { //STT MaHS HoTen GioiTinh NamSinh DiaChi TacVu
         tableHtml += `<td>${new Date(item.NgaySinh).getFullYear()}</td>`;
         tableHtml += `<td>${item.DiaChi}</td>`;
         tableHtml += `<td><ul class='action'>`;
-        tableHtml += `<li><button title='Xem chi tiết' data-id=${item.MaHS} onclick="dispDetaiInfo(this);"><i class='fa fa-eye' aria-hidden='true'></i></button></li>`;
+        tableHtml += `<li><button title='Xem chi tiết' data-id=${item.MaHS} onclick="dispDetailInfo(this);"><i class='fa fa-eye' aria-hidden='true'></i></button></li>`;
         tableHtml += `<li><button title='Xóa học sinh' data-id=${item.MaHS} onclick="removeOffClass(this);"><i class='fa fa-trash' aria-hidden=true'></i></button></li>`;
         tableHtml += `</ul></td>`;
         
@@ -156,9 +160,38 @@ function updateClassInfo(element) { // stuListContent
         }
     })
 }
-function dispDetailInfo(element) {  // stuClasContent
-    return;
+const container = document.querySelector('.container');
+const formBox = document.querySelector('#form-box');
+const ms = document.querySelector('#ms');
+const ht = document.querySelector('#ht');
+const gt = document.querySelector('#gt');
+const ns = document.querySelector('#ns');
+const dc = document.querySelector('#dc');
+const em = document.querySelector('#em');
+function dispDetailInfo(element) {
+    let mahs = element.dataset.id;
+    //MaHS, HoTen, GioiTinh, NgaySinh, DiaChi, Email
+    fetch('http://localhost:5000/student/' + mahs) 
+    .then(response => response.json())
+    .then(data => {
+        if (data.data.length > 0) {
+            let stuData = data.data[0];
+            ms.value = stuData.MaHS;
+            ht.value = stuData.HoTen;
+            gt.value = stuData.GioiTinh;
+            ns.value = new Date(stuData.NgaySinh).toISOString().substring(0, 10); // 01-01-2001
+            dc.value = stuData.DiaChi;
+            em.value = stuData.Email;
+            container.style.opacity = 0.8;
+            formBox.style.display = 'block';    
+        }
+    }) 
+    .catch(error => console.log(error));
 }
+function closeDetailInfo() {
+    container.style.opacity = 1;
+    formBox.style.display = 'none';   
+} 
 function updateSTT(index) {
     let l = stuClassContent.rows.length;
     for (let i=index; i<l;i++) {
