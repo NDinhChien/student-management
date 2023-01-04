@@ -49,20 +49,25 @@ function displayAddStuForm() {
 function readonlyStuForm() {
     mahs.setAttribute('readonly', 'true');
     hoten.setAttribute('readonly', 'true');
-    gtinh.setAttribute('readonly', 'true');
+    gtinh.setAttribute('disabled', 'true');
+    gtinh.style.backgroundColor = 'white';
+    gtinh.style.color = 'black';
     ngsinh.setAttribute('readonly', 'true');
     diachi.setAttribute('readonly', 'true');
     email.setAttribute('readonly', 'true');
-    lop.setAttribute('readonly', 'true');
+    lop.setAttribute('disabled', 'true');
+    lop.style.backgroundColor = 'white';
+    lop.style.color = 'black';
+
 }
 function removeReadonly() {
     mahs.removeAttribute('readonly');
     hoten.removeAttribute('readonly');
-    gtinh.removeAttribute('readonly');
+    gtinh.removeAttribute('disabled');
     ngsinh.removeAttribute('readonly');
     diachi.removeAttribute('readonly');
     email.removeAttribute('readonly');
-    lop.removeAttribute('readonly');
+    lop.removeAttribute('disabled');
 }
 function displayDetailStuInfo(Mahs) {
     fetch('http://localhost:5000/student/' + Mahs)
@@ -103,14 +108,68 @@ function editableStuForm(event) {
 function resetStuForm(event) {
     event.preventDefault();
     stuForm.reset();
+
 }
-function isFormFilled() {
+
+// Name validated
+// Tham khảo: https://regex101.com/r/rrarp6/1
+
+
+function isValidName (string) {
+    var re = /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$/gm
+    return re.test(string)
+}
+
+// Eail validate
+// https://www.w3resource.com/javascript/form/email-validation.php
+
+function isValidEmail(mail) 
+{
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+    {
+        return (true)
+    }
+    return (false)
+}
+
+function isValidBirthDay(birth)
+{
+    const day = new Date();
+    let year = day.getFullYear();
+    let yearOfBirth = parseInt(ngsinh.value.split('-')[0]);
+
+    if(year- yearOfBirth < 15 || year - yearOfBirth > 20)
+    {
+        return false
+    }
+    return true
+}
+function FormValidated() {
     const elements = document.querySelectorAll("#stu-form input");
     for (let x=1; x<elements.length; x++)  {
         if (elements[x].value ==="") {
+            inform.innerHTML= "<p style='color:red;'>Vui lòng nhập đủ thông tin!</p>";
             return false;
         }
     }
+    console.log(!isValidName(hoten.value))
+    if (!isValidName(hoten.value)){
+        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ!</p>";
+        return false;
+    }
+
+    if(!isValidEmail(email.value))
+    {
+        inform.innerHTML= "<p style='color:red;'>Địa chỉ email không hợp lệ!</p>";
+        return false;
+    }
+
+    if(!isValidBirthDay(ngsinh.value))
+    {
+        inform.innerHTML= "<p style='color:red;'>Tuổi của học sinh phải nằm trong khoảng từ 15 đến 20!</p>";
+        return false;
+    }
+
     return true;
 }
 
@@ -171,9 +230,10 @@ function find(idOrName) {
         }
     }
     if (isId==true) {
-        return stuData.filter((x)=>(x.MaHS===idOrName));
+        subData = stuData.filter((x)=>(x.MaHS === parseInt(idOrName)));
+    } else{
+        subData = stuData.filter((x)=>(x.HoTen.toLowerCase().includes(idOrName.toLowerCase())));
     }
-    subData = stuData.filter((x)=>(x.HoTen.toLowerCase().includes(idOrName.toLowerCase())));
 }
 // cập nhật thông tin học sinh đã được chỉnh sửa trên stuData và Student Table
 function updateRowStuTable(Mahs, data, nData) {    
@@ -227,20 +287,29 @@ function search() {
     // lấy dữ liệu input
     const stu_input = document.querySelector('#srch-stu-input').value; 
     // fetch
+     
     if (stuData.length === 0) {
-        allStuBtn.click();    
+        allStuBtn.click();     
+        setTimeout(function(){ 
+            find(stu_input);
+            loadStuTable(subData);
+            loadingSubData = true;
+        }, 1000);
+
     }
-    find(stu_input);
-    loadStuTable(subData);
-    loadingSubData = true;
+    else{
+        find(stu_input);
+        loadStuTable(subData);
+        loadingSubData = true;
+    }
 }
 
 // Thêm học sinh vào DB
 addStuBtn.onclick = insert;
 function insert(event) {
     event.preventDefault();
-    if (!isFormFilled()) {
-        inform.innerHTML= "<p style='color:red;'>Vui lòng nhập đủ thông tin!</p>";
+    if (!FormValidated()) {
+        setTimeout(function(){ inform.innerHTML="";}, 3000);
         return;
     } 
     const data = {

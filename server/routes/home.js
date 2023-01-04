@@ -3,7 +3,8 @@ const homeController = require('../controllers/home');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', homeController.homepage);
+// router.get('/', homeController.homepage);
+router.get('/', homeController.loginpage);
 router.get('/login', homeController.loginpage);
 router.get('/logout', homeController.logoutpage);
 router.get('/student', homeController.studentpage);

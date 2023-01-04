@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `qlhocsinh` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `qlhocsinh` ;
 USE `qlhocsinh`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
@@ -230,7 +230,7 @@ CREATE TABLE `lophoc` (
   `Lop` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SiSo` int DEFAULT '0',
   PRIMARY KEY (`Lop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -232,3 +232,17 @@
 .container .right-container .main-content .main-content__action button i {
   margin-right: 5px;
 }/*# sourceMappingURL=student-list.css.map */
+
+#lop{
+  font-weight: 550;
+  font-size: 15px;
+}
+
+#gtinh{
+  font-weight: 550;
+  font-size: 15px;
+}
+
+#inform{
+  margin: 7px;
+}

@@ -6,7 +6,7 @@ function submitForm() {
     let username = document.querySelector('#username').value;
     let password = document.querySelector('#password').value;
     if (!username || !password) {
-        informbtn.innerHTML = "<p style='color: red;'>Vui lòng nhập đủ thông tin!<p>";
+        informbtn.innerHTML = "<p style='font-size: 25px; color: red;'>Vui lòng nhập đủ thông tin!<p>";
         setTimeout(()=> informbtn.innerHTML='', 3000);
     }
     else {
@@ -31,7 +31,7 @@ function submitForm() {
             else {    
                 informbtn.innerHTML = "<p style='color: red;'>Đăng nhập thành công<p>";
                 localStorage.setItem('username', username);
-                setTimeout(()=> {informbtn.innerHTML=''; location.replace("http://localhost:5000/")}, 1000);
+                setTimeout(()=> {informbtn.innerHTML=''; location.replace("http://localhost:5000/student")}, 1000);
             }
         })
         .catch(error => {
