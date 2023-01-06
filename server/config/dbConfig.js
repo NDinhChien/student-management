@@ -1,7 +1,7 @@
 module.exports = {
   HOST: 'localhost',
-  USERNAME: 'chien',
-  PASSWORD: 'chien12345',
+  USERNAME: 'root',
+  PASSWORD: 'hoaihcb1',
   DATABASE: 'qlhocsinh',
   DB_PORT: 3306
 }

@@ -11,6 +11,8 @@ const session = require("express-session")
 const mySQLStore = require("express-mysql-session")(session);
 const pool = require('./utils/getPool');
 const cors = require('cors');
+
+
 app.use(cors());
 app.use(cookieParser());
 // cho phép nhận xử lý dữ liệu json và x-www-form-urlencoded
