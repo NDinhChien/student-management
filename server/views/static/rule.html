@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="http://localhost:5000/css/student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Danh sách học sinh</title>
+</head>
+<style>
+i {
+    background-color: gray;
+    color: black; 
+}
+
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom: 'none';
+}
+</style>
+<body style="box-sizing: border-box;">
+    <div class="container">
+        <div class="sidebar">
+            <div class="header_sidebar">
+                <div class="header__sidebar-left">
+                    <p id="user">Người dùng: <span id="username">Chien</span></p>
+                    <p id="today">Hôm nay: <span id="todayis"></span></p>
+                    <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
+                </div>
+                <div class="header__sidebar-right">
+
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="menu-title">
+                        <a href="#">MENU</a>
+                    </li>
+                    <li class = "active">
+                        <a href="/student">Danh Sách Học Sinh</a>
+                    </li>
+                    <li>
+                      <a href="/class">Danh Sách Lớp</a>
+                    </li>
+                    <li>
+                        <a href="/score">Bảng Điểm Môn Học</a>
+                    </li>
+                    <li>
+                        <a href="/report">Báo Cáo Tổng Kết</a>
+                    </li>
+                    <li>
+                        <a href="/rule">Quy Định</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-container" style="height:auto;">
+            <div class="header">
+                <h1>Hệ Thống Quản Lý Học Sinh</h1>
+            </div>
+            <div class="class-title">
+                <p>Quy định</p>
+            </div>
+            <div class="select">
+              
+            </div>
+            <div class="main-content" style="height: 400px; overflow: visible;">
+ 
+                   
+            </div>
+        </div>
+    </div>
+    <script src="http://localhost:5000/js/student.js"> 
+    </script>
+</body>
+
+</html>

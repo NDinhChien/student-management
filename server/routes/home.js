@@ -11,4 +11,5 @@ router.get('/student', homeController.studentpage);
 router.get('/class', homeController.classpage);
 router.get('/score', homeController.scorepage);
 router.get('/report', homeController.reportpage);
+router.get('/rule',homeController.rulepage);
 module.exports = router;
