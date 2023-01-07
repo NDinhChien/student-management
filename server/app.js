@@ -58,7 +58,6 @@ const studentRoutes = require('./routes/student');
 const userRoutes = require('./routes/user');
 const classRoutes = require('./routes/class');
 const scoreRoutes = require('./routes/score');
-const ruleRoutes = require('./routes/rule')
 
 app.use(reportRoutes);
 app.use(scoreRoutes);
@@ -66,7 +65,6 @@ app.use(homeRoutes);
 app.use(userRoutes);
 app.use(studentRoutes);
 app.use(classRoutes);
-app.use(ruleRoutes);
 
 // Chạy server
 app.listen(PORT, () => console.log('app is running'));
