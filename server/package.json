@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --inspect app",
+    "dev": "nodemon app",
+    "deploy": "firebase deploy --only functions:api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "webpack": "^5.75.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "webpack-cli": "^5.0.1"
+  },
+  "engines": {
+    "node": "16"
+  }
+}
