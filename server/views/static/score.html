@@ -20,7 +20,7 @@
                 <div class="header__sidebar-left">
                     <p id="user">Người dùng: <span id="username"></span></p>
                     <p id="today">Hôm nay: <span id="todayis"></span></p>
-                    <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
+                    <p id="today"><span id="logout"><a href="/logout" style="color: blue;">Đăng xuất<a></span></p>
                 </div>
                 <div class="header__sidebar-right">
                 </div>
@@ -42,7 +42,9 @@
                     <li>
                         <a href="/report">Báo Cáo Tổng Kết</a>
                     </li>
-                    
+                    <li>
+                        <a href="/rule">Quy Định</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -148,9 +150,9 @@
                           </div>
                         </div>
                         <div class="main-content__action">
-                            <button id='update-score-btn' onclick="updateStuScore()"><i class="fa-solid fa-pen"></i>Cập nhật</button>
-                            <button id='reset-btn' onclick="resetForm();"><i class="fa-solid fa-arrow-rotate-left"></i>Làm mới</button>
-                            <button id='edit-mode-btn' onclick="openEditMode();"><i class="fa fa-pencil"></i>Chỉnh sửa</button>
+                            <button id='update-score-btn' style="width: 100px;" onclick="updateStuScore()"><i class="fa-solid fa-pen"></i>Cập nhật</button>
+                            <button id='reset-btn' style="width: 100px;" onclick="resetForm();"><i class="fa-solid fa-arrow-rotate-left"></i>Làm mới</button>
+                            <button id='edit-mode-btn' style="width: 100px;" onclick="openEditMode();"><i class="fa fa-pencil"></i>Chỉnh sửa</button>
                         </div>
                     </div>
                 </div>

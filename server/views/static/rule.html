@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="http://localhost:5000/css/rule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Danh sách học sinh</title>
+</head>
+<style>
+i {
+    background-color: gray;
+    color: black; 
+}
+
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom: 'none';
+}
+</style>
+<body style="box-sizing: border-box;">
+    <div class="container">
+        <div class="sidebar">
+            <div class="header_sidebar">
+                <div class="header__sidebar-left">
+                    <p id="user">Người dùng: <span id="username">Chien</span></p>
+                    <p id="today">Hôm nay: <span id="todayis"></span></p>
+                    <p id="today"><span id="logout"><a href="/logout" style="color: blue;">Đăng xuất<a></span></p>
+                </div>
+                <div class="header__sidebar-right">
+
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="menu-title">
+                        <a href="#">MENU</a>
+                    </li>
+                    <li >
+                        <a href="/student">Danh Sách Học Sinh</a>
+                    </li>
+                    <li>
+                      <a href="/class">Danh Sách Lớp</a>
+                    </li>
+                    <li>
+                        <a href="/score">Bảng Điểm Môn Học</a>
+                    </li>
+                    <li>
+                        <a href="/report">Báo Cáo Tổng Kết</a>
+                    </li>
+                    <li class = "active">
+                        <a href="/rule">Quy Định</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-container" style="height:auto;">
+            <div class="header">
+                <h1>Hệ Thống Quản Lý Học Sinh</h1>
+            </div>
+            <div class="class-title">
+                <p>Quy định</p>
+            </div>
+            <div class="select">
+              
+            </div>
+            <div class="main-content" style="height: 400px; overflow: visible;">
+                <div class="rule1">
+                    <p>Thay đổi tuổi tối thiểu, tuổi tối đa.</p>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Tuổi tối thiểu:</th>
+                          <th><input id="lower-age" type="number" min="1"></th>
+                          <th style="padding-left: 10px;">Tuổi tối đa:</th>
+                          <th><input id="upper-age" type="number" min="1"></th>
+                          <th><button id="age">Áp dụng</button></th>
+                        </tr>
+                        <tr>
+                          <th>
+
+                            <div id="inform-age"> </div>
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="rule2">
+                    <p>Thay đổi sĩ số tối đa của các lớp, thay đổi số lượng và tên
+                  các lớp trong trường.</p>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th >Sĩ số tối đa:</th>
+                          <th><input id="count-stu" type="number" min="1"></th>
+                          <th><button id="count">Áp dụng</button></th>
+                        </tr>
+                        <tr>
+                          <th>Xóa Lớp: </th>
+                           <th>
+                             <select id="class-input" class="select-class">
+                                  <!-- <option value="10A1">Lớp 10A1</option>
+                                  <option value="10A2">Lớp 10A2</option>
+                                  <option value="10A3">Lớp 10A3</option>
+                                  <option value="11A1">Lớp 11A1</option>
+                                  <option value="11A2">Lớp 11A2</option>
+                                  <option value="11A3">Lớp 11A3</option>
+                                  <option value="12A1">Lớp 12A1</option>
+                                  <option value="12A2">Lớp 12A2</option> -->
+                                </select>
+                           </th>
+                           <th><button id="delete-class-btn">Xóa lớp</button></th>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                        <tr>
+                          <th>
+                             <div id="sub-selection" class="select-semester">
+                               <span>Đổi tên lớp: </span>
+                               <select id="class-input2" class="select-class">
+                                   
+                               </select>
+                           </div>
+                          </th>
+                          <th style="text-align: left;">
+                            <p style="text-align: right;">Tên mới: </p>
+                          </th>
+                          <th><input id="rename-class" type="text" ></th>
+                          <th><button id="rename-class-btn">Áp dụng</button></th>
+                         </tr>
+
+                        <tr>
+                          <th>Thêm lớp mới: </th>
+                           <th>
+                              <input id="add-class" type="text">
+                           </th>
+                          <th><button id="add-class-btn">Thêm lớp</button></th>
+                        </tr>
+
+                        <tr>
+                          <th>
+
+                            <div id="inform-class"> </div>
+                          </th>
+                        </tr>
+
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="rule3">
+                    <p>Thêm, xóa, đổi tên môn học.</p>
+                    <table>
+                      <thead>
+                        <tr>
+                         <th>
+                            <div id="sub-selection" class="select-semester">
+                              <span>Chọn môn học:</span>
+                              <select id="subject-input" class="select-sub">
+                                  <option value="Toán">Toán</option>
+                                  <option value="Văn">Văn</option>
+                                  <option value="Lý">Lý</option>
+                                  <option value="Hóa">Hóa</option>
+                                  <option value="Sinh">Sinh</option>
+                                  <option value="Sử">Sử</option>
+                                  <option value="Địa">Địa</option>
+                                  <option value="Đạo Đức">Đạo Đức</option>
+                                  <option value="Thể Dục">Thể Dục</option>
+                              </select>
+                          </div>
+                         </th>
+                         <th style="text-align: left;">
+                           <p style="text-align: right;">Tên mới: </p>
+                         </th>
+                         <th><input type="text" ></th>
+                         <th><button>Áp dụng</button></th>
+                        </tr>
+                        <tr>
+                          <th>
+                            <div id="sub-selection" class="select-semester">
+                              <span>Chọn môn học:</span>
+                              <select id="subject-input" class="select-sub">
+                                  <option value="Toán">Toán</option>
+                                  <option value="Văn">Văn</option>
+                                  <option value="Lý">Lý</option>
+                                  <option value="Hóa">Hóa</option>
+                                  <option value="Sinh">Sinh</option>
+                                  <option value="Sử">Sử</option>
+                                  <option value="Địa">Địa</option>
+                                  <option value="Đạo Đức">Đạo Đức</option>
+                                  <option value="Thể Dục">Thể Dục</option>
+                              </select>
+                          </div>
+                         </th>
+                         <th><button>Xóa</button></th>
+                        </tr>
+                        <tr>
+                           <th >Tên môn học:<input type="text"><button>Thêm</button> </th>
+              
+                        </tr>
+
+                        <tr>
+                          <th>
+
+                            <div id="inform-sub"> </div>
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="rule5">
+                    <p>Thay đổi điểm chuẩn đạt môn</p>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Điểm chuẩn:</th>
+                          <th><input id="score" type="number"></th>
+                          <th><button id="score-btn">Áp dụng</button></th>
+                        </tr>
+
+                        <tr>
+                          <th>
+
+                            <div id="inform-score"> </div>
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                   
+            </div>
+        </div>
+    </div>
+    <script src="http://localhost:5000/js/rule.js"> 
+    </script>
+</body>
+
+</html>

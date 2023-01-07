@@ -27,8 +27,21 @@ const updateClassInfo = (req, res) => {
     .then(data => res.json({success: data}))
     .catch(error => console.log(error));
 }
+
+// Lấy danh sách các lớp
+const getName = (req, res) => {
+    // const { name } = req.params;
+    let result = classModel.getName();
+    result
+    .then(data => {
+        res.json({data: data})
+    })
+    .catch(error => console.log(error));
+}
+
 module.exports = {
     getAll,
     stuList,
-    updateClassInfo
+    updateClassInfo,
+    getName
 }

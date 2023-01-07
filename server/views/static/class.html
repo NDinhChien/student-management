@@ -19,12 +19,13 @@
         margin-right: 10px;
     }
     #form-box {
-        background-color: rgb(43, 224, 43);
+        background-color: #146ac2;
         border: 1px solid black;
         top: 35%;
         left: 45%;
         position: fixed; 
         z-index:1;
+        padding:10px;
     }
     #form-box label {
         display: inline-block;
@@ -33,12 +34,16 @@
         margin: 8px;
     }
     #closebtn {
-        float: right; 
-        color: red;
+        float: right;
+        color: #ffffff;
         font-size: 40px;
+        cursor: pointer;
+        padding: 0px 9px;
+        background: #0b0b0b;
+        border-radius: 3px;
     }
     #closebtn:hover {
-        opacity: 0.8;
+        background: #000;
     }
 </style>
 <body>
@@ -48,7 +53,7 @@
                 <div class="header__sidebar-left">
                     <p id="user">Người dùng: <span id="username">Chien</span></p>
                     <p id="today">Hôm nay: <span id="todayis">22-11-2022</span></p>
-                    <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
+                    <p id="today"><span id="logout"><a href="/logout" style="color: blue;">Đăng xuất<a></span></p>
                 </div>
                 <div class="header__sidebar-right">
                 </div>
@@ -69,6 +74,9 @@
                     </li>
                     <li>
                         <a href="/report">Báo Cáo Tổng Kết</a>
+                    </li>
+                    <li>
+                        <a href="/rule">Quy Định</a>
                     </li>
                 </ul>
             </div>
@@ -122,7 +130,7 @@
                     </div>
                     <div id='stu-table' class="main-content__info-top" style=" border: none;display: none;width: 610px;">
                         
-                        <table style="width:500px;border: 1px solid black; border-collapse: collapse;">
+                        <table style="width:100%;border: 1px solid black; border-collapse: collapse;">
                             <div style="padding:7px; border: 1px solid black;border-bottom: none;">DSHS Chưa Phân Lớp</div>
                             <thead>
                                 <tr>
@@ -136,6 +144,9 @@
                             <tbody id="stu-list-content">
                             </tbody>
                         </table>
+                        <div id="inform">
+
+                        </div>
                     </div>
                 </div>
 

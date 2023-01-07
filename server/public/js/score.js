@@ -152,3 +152,15 @@ function openEditMode() {
     d1t.removeAttribute('readonly');
     thihk.removeAttribute('readonly');
 }
+
+let selectHtml = ""
+
+fetch('http://localhost:5000/class/listClass')
+.then(response => response.json())
+.then(data => {
+    data['data'].forEach(({Lop, SiSo}) => {            
+        selectHtml += `<option value=${Lop}>${Lop}</option>`;
+    });
+
+    classInput.innerHTML = selectHtml;
+})

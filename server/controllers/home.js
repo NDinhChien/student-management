@@ -66,6 +66,15 @@ const reportpage = (req, res) => {
     }
 };
 
+const rulepage = (req, res) => {
+    if (req.session && req.session.isAuth) {
+        res.sendFile(path.join(__dirname, '../views/static/rule.html'));
+    }
+    else {
+        res.redirect('/login');
+    }
+};
+
 module.exports = {
     homepage,
     loginpage,
@@ -73,5 +82,6 @@ module.exports = {
     studentpage,
     classpage,
     scorepage,
-    reportpage
+    reportpage,
+    rulepage
 }

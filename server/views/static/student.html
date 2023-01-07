@@ -14,7 +14,7 @@
 </head>
 <style>
 i {
-    background-color: gray;
+   padding:5px 7px;
     color: black; 
 }
 
@@ -32,7 +32,7 @@ th, td {
                 <div class="header__sidebar-left">
                     <p id="user">Người dùng: <span id="username">Chien</span></p>
                     <p id="today">Hôm nay: <span id="todayis"></span></p>
-                    <p id="today"><span id="logout"><a href="/logout" style="color: red;">Đăng xuất<a></span></p>
+                    <p id="today"><span id="logout"><a href="/logout" style="color:blue;">Đăng xuất<a></span></p>
                 </div>
                 <div class="header__sidebar-right">
 
@@ -55,6 +55,9 @@ th, td {
                     <li>
                         <a href="/report">Báo Cáo Tổng Kết</a>
                     </li>
+                    <li>
+                        <a href="/rule">Quy Định</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -71,10 +74,10 @@ th, td {
               <input type="text" id="srch-stu-input" placeholder="Nhập mã số hoặc họ tên..."/>
               <button id="srch-stu-btn"><i class="fa fa-search"></i></button>
             </div>
-            <div class="main-content" style="height: 400px; overflow: visible;">
+            <div class="main-content" >
                 <div class="main-content__info" >
                     <div class="main-content__info-top" >
-                        <table style="width:100%">
+                        <table style="width:100%;height:inherit">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -86,7 +89,8 @@ th, td {
                                     <th>Tác vụ</th>
                                 </tr>
                             </thead>
-                            <tbody id="stu-table-content">            
+                            <tbody id="stu-table-content"> 
+                                
                             </tbody>
                         </table>
                     </div>
@@ -119,6 +123,7 @@ th, td {
                                 <label for="email">Email</label>
                                 <input type="email" id="email"/>
                             </div>
+                            
                             <div class="box" id="classInput">
                                 <label for="lop">Lớp</label>
                                 <select id="lop" style="float:right;">
@@ -136,16 +141,16 @@ th, td {
                             </div>
                         </div>
                         <div class="main-content__action" style="margin-top: 10px;">
-                            <button id="add-stu-btn"><i class="fa-solid fa-circle-plus"></i>Thêm</button>
+                            <button id="add-stu-btn">Thêm</button>
                             <button id="edit-stu-btn" onclick="editableStuForm(event);"><i class="fa-solid fa-pen"></i>Sửa</button>
-                            <button id="update-stu-btn"><i class="fa-solid fa-pen"></i>Cập nhật</button>
+                            <button id="update-stu-btn">Cập nhật</button>
                             <button id ="reset-btn" onclick="resetStuForm(event);">Làm mới</button> 
                             <button id="cancel-btn" type="button" onclick="document.querySelector('#stu-form').style.display='none';">Hủy </button>
                         </div>
-                        
                         <div id="inform">
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

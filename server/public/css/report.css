@@ -4,7 +4,10 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-
+:root {
+  --primary: #3ba1c5;
+  --cat-color: #2596be;
+}
 .container {
   display: flex;
   height: 100vh;
@@ -13,23 +16,26 @@
 .container .sidebar {
   width: 15%;
   height: 100%;
-  background-color: rgb(194, 189, 189);
+   background-color: rgb(222 236 250);
 }
 .container .sidebar .header_sidebar {
   border-bottom: 3px solid black;
   padding: 48px 20px;
 }
 .container .sidebar .header_sidebar .header__sidebar-left #user {
-  color: blue;
+ color: #333;
+  font-weight: bold;
 }
 .container .sidebar .header_sidebar .header__sidebar-left #user span {
-  color: red;
+   color: #Be2540;
+  font-weight: bold;
 }
 .container .sidebar .header_sidebar .header__sidebar-left #today {
-  color: blue;
+   color: #333;
+  font-weight: bold;
 }
 .container .sidebar .header_sidebar .header__sidebar-left #today span {
-  color: green;
+   color: #Be2540;
 }
 .container .sidebar .menu {
   margin-top: 50px;
@@ -38,10 +44,12 @@
   list-style: none;
 }
 .container .sidebar .menu ul .menu-title {
-  background-color: blue;
+  background-color: #0f3c4c;
+  font-weight: bold;
 }
 .container .sidebar .menu ul .menu-title a {
-  color: #fff;
+   color: #fff;
+  font-weight: bold;
 }
 .container .sidebar .menu ul li {
   text-align: center;
@@ -54,29 +62,40 @@
 }
 .container .sidebar .menu ul li:hover {
   transition: 0.3s ease-in-out;
-  background-color: orange;
+  background-color: #2187ab;
+}
+.container .sidebar .menu ul .menu-title:hover {
+  background-color: #0f3c4c;
+  cursor:default;
+}
+.container .sidebar .menu ul li:hover a {
+  color: #fff
 }
 .container .sidebar .menu ul li a {
   text-decoration: none;
-  color: blue;
+  color: var(--cat-color);
   font-weight: bold;
 }
 .container .sidebar .menu ul .active {
-  background-color: orange;
+   background-color: var(--cat-color);
+}
+.container .sidebar .menu ul .active a {
+  color:#fff;
 }
 .container .right-container {
   width: 85%;
   height: 100%;
 }
 .container .right-container .header {
+  text-transform: uppercase;
   width: 100%;
-  background-color: green;
+  background-color: var(--primary);
   height: 137px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: red;
+  color: #fff;
 }
 .container .right-container .select {
   width: 900px;
@@ -85,15 +104,17 @@
   align-items: center;
 }
 .container .right-container .class-title {
-  margin-top: 25px;
-  background-color: rgb(36, 201, 36);
+   margin-top: 25px;
+  text-transform: uppercase;
+  background-color: var(--primary);
   padding: 7px;
   position: relative;
   text-align: center;
 }
 .container .right-container .class-title p {
-  color: #fff;
-  font-size: 28px;
+   color: #fff;
+  font-size: 25px;
+  font-weight: bold;
 }
 .container .right-container .class-title span {
   position: absolute;
@@ -111,36 +132,48 @@
 .container .right-container .select button {
   margin-left: 15px;
   padding: 4px 8px;
-  background-color: gray;
+  background-color: #1b6fc3;
+  color:#fff;
   outline: none;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  padding:5px 7px;
 }
 .container .right-container .select button:hover {
   color: #ffF;
-  background-color: green;
-  transition: 0.2s;
+  background-color: #146ac2;
+  transition: 0.1s;
   transform: scale(1.1);
+}
+.container .right-container .select button#srch-stu-btn {
+  transform: scale(1);
+  padding:5px 7px;
+}
+.container .right-container .select button#srch-stu-btn i{
+  color: #ffF;
+  background-color: transparent;
+}
+input#srch-stu-input{
+  padding:5px;
+  border-radius: 5px;
 }
 .container .right-container .main-content {
   padding: 10px;
-  width: 900px;
+  width: 1200px;
+  height: 1000px;
   margin-top: 5px;
   margin-left: 50px;
-  background-color: rgb(189, 186, 186);
   display: flex;
 }
 .container .right-container .main-content .main-content__info {
   width: 1180px;
   height: 100%;
   display: flex;
-  border: 1px solid gray;
 }
 .container .right-container .main-content .main-content__info .main-content__info-top {
   margin-bottom: 2px;
-  border: 1px solid black;
-  min-height: 150px;
+  height:10px;
   display: flex;
   justify-content: space-around;
   width: 856px;
@@ -150,6 +183,7 @@
 .container .right-container .main-content .main-content__info .main-content__info-top table th {
   border: 1px solid #333;
   text-align: center;
+  padding:5px 10px;
 }
 .container .right-container .main-content .main-content__info .main-content__info-top table tbody tr td button {
   padding: 3px 8px;
@@ -158,8 +192,9 @@
   border: none;
   outline: none;
   border-radius: 5px;
+  background: #c3d8ed;
 }
 .container .right-container .main-content .main-content__info .main-content__info-top table tbody tr td button:hover {
-  color: orange;
+  color: #146ac2;
   transition: 0.2s;
 }/*# sourceMappingURL=semester-report.css.map */
