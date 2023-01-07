@@ -25,7 +25,38 @@ const update = (req, res) => {
 }
 
 
+const removeClass = (req, res) => {
+    const {data} = req.body;
+    console.log(data);
+    const result = rule.removeClass(data);
+    result
+    .then(data => res.json({success: data}))
+    .catch(error => console.log(error));
+}
+
+const renameClass = (req, res) => {
+    const {data} = req.body;
+    console.log(data);
+    const result = rule.renameClass(data['oldname'], data['newname']);
+    result
+    .then(data => res.json({success: data}))
+    .catch(error => console.log(error));
+}
+
+
+const addClass = (req, res) => {
+    const {data} = req.body;
+    console.log(data);
+    const result = rule.addClass(data);
+    result
+    .then(data => res.json({success: data}))
+    .catch(error => console.log(error));
+}
+
 module.exports =  {
     getOne,
-    update
+    update,
+    removeClass,
+    renameClass,
+    addClass
 };

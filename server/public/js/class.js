@@ -8,6 +8,7 @@ const stuListContent = document.querySelector('#stu-list-content');
 const stuTable = document.querySelector('#stu-table');
 const className = document.querySelector('#class-name');
 const number = document.querySelector('#number');
+const inform = document.querySelector('#inform');
 
 const todayis = document.querySelector('#todayis');
 const user = document.querySelector('#username');
@@ -185,12 +186,12 @@ async function isFullStudent()
 
 
 
-function updateClassInfo(element) { // stuListContent
+async function updateClassInfo(element) { // stuListContent
     const mahs = element.dataset.id;
     const index = element.dataset.index;
 
-    console.log(isFullStudent());
-    if(isFullStudent() === true){
+    // console.log(await isFullStudent());
+    if(await isFullStudent() === true){
         inform.innerHTML = "<p style='color:red;'>Lớp hiện tại đã đủ sĩ số!</p>";
         setTimeout(function(){ inform.innerHTML="";}, 3000);
         return false;

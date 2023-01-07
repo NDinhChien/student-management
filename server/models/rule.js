@@ -44,8 +44,75 @@ const update = async (stt, data) => {
     }
 }
 
+const removeClass = async (className) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            const query = 'call Xoa(?);';
+            pool.query(query,[className], (err, result) => {
+                if (err) reject(new Error(err.message));
+                let data = JSON.parse(JSON.stringify(result));
+                // console.log(data[0][0]['\'@message\'']);
+                // console.log(data[0][0]);
+                // console.log(data[0][0]['@message']);
+
+
+                resolve(data[0][0]['@message']);
+            })
+        });
+        return response===1 ? true: false;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
+
+const renameClass = async (oldName, newName) => {
+    try {
+        const response = await new Promise((resolve, reject) => {
+            const query = 'call Doitenlop(?,?);';
+            pool.query(query,[oldName, newName], (err, result) => {
+                if (err) reject(new Error(err.message));
+                let data = JSON.parse(JSON.stringify(result));
+                // console.log(data[0][0]['\'@message\'']);
+                // console.log(data[0][0]);
+                // console.log(data[0][0]['@message']);
+
+
+                resolve(data[0][0]['@message']);
+            })
+        });
+        return response===1 ? true: false;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
+
+
+const addClass = async (newclass) => {
+    try {
+        console.log(newclass);
+        const response = await new Promise((resolve, reject) => {
+            const query = 'call Them(?);';
+            pool.query(query,[newclass], (err, result) => {
+                if (err) reject(new Error(err.message));
+                let data = JSON.parse(JSON.stringify(result));
+
+                resolve(data[0][0]['@message']);
+            })
+        });
+        return response===1 ? true: false;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
+
 
 module.exports = {
     getOne,
-    update
+    update,
+    removeClass,
+    renameClass,
+    addClass
 };

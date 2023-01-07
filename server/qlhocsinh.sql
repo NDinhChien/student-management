@@ -374,6 +374,59 @@ BEGIN
 	END IF;
 END ;;
 DELIMITER ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE Doitenlop(IN TenLopCu char(10), IN TenLopMoi char(10))
+BEGIN
+	declare message nchar(100);
+	declare s int;
+	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLopMoi COLLATE utf8mb4_0900_ai_ci) > 0 THEN
+		set @message=concat('Đã tồn tại lớp"',TenLopMoi,'".');
+	ELSE
+		START TRANSACTION;
+        set @s=(select LopHoc.SiSo from LopHoc where LopHoc.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci);
+		insert LopHoc(Lop,SiSo) values(TenLopMoi,@s);
+		update HocSinh set Hocsinh.Lop=TenLopMoi where HocSinh.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci;
+        delete from LopHoc where LopHoc.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci;
+		set @message='Đổi tên lớp thành công !';
+        COMMIT;
+    END IF;
+    select @message;
+END;;
+DELIMITER ;;
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE Them(IN TenLop char(10))
+BEGIN
+	declare message nchar(100);
+	declare s int;
+	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLop COLLATE utf8mb4_0900_ai_ci) > 0 THEN
+		set @message=concat('Đã tồn tại lớp "',TenLop,'".');
+	ELSE
+		START TRANSACTION;
+        insert lophoc values (TenLop,0);
+		set @message='Thêm lớp thành công !';
+        COMMIT;
+    END IF;
+    select @message;
+END;;
+DELIMITER ;;
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE Xoa(IN TenLop char(10))
+BEGIN
+	declare message nchar(100);
+	declare s int;
+	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLop COLLATE utf8mb4_0900_ai_ci) = 0 THEN
+		set @message=concat('Chua ton tai lop "',TenLop,'".');
+	ELSE
+		START TRANSACTION;
+		update HocSinh set Hocsinh.Lop=Null where HocSinh.Lop=TenLop COLLATE utf8mb4_0900_ai_ci;
+        delete from LopHoc where LopHoc.Lop=TenLop COLLATE utf8mb4_0900_ai_ci;
+		set @message='Xóa lớp thành công !';
+        COMMIT;
+    END IF;
+    select @message;
+END;;
+DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
