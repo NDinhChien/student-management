@@ -160,7 +160,13 @@ function FormValidated() {
     }
     console.log(!isValidName(hoten.value))
     if (!isValidName(hoten.value)){
-        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ!</p>";
+        
+        // let splitName =  hoten.value.split(' ');
+        // for( let i=0; i<splitName.length; i++){
+        //     if(splitName[i][0]<='z' && splitName[i][0] >= )
+        // }
+
+        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ! Họ và tên cần viết hoa chữ cái đầu và không chứ kỹ tự đặc biệt!</p>";
         return false;
     }
 
@@ -410,7 +416,6 @@ function remove(mahs) {
 }
 
 
-const listClass = []
 
 let selectHtml = ""
 

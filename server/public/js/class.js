@@ -1,4 +1,5 @@
 let currentClass='';
+let maxstu = [];
 const viewClassBtn = document.querySelector('#view-class-btn');
 const classInput = document.querySelector('#class-input');
 const dispStuListBtn = document.querySelector('#disp-stu-list-btn');
@@ -143,22 +144,74 @@ function addStuList(element) { //MaHS HoTen NamSinh DiaChi ADD
     `<li><button title='Thêm' data-gt=${gtinh} data-index=${stt} data-id=${mahs} onclick="updateClassInfo(this); "><i class='fa fa-add' aria-hidden='true'></i></button></li>` +
     `</ul></td>`;
 }
+
+
+
+async function isFullStudent()
+{
+    const response = await new Promise((resolve, reject) => {
+        fetch('http://localhost:5000/rule/2')
+        .then(response => response.json())
+        .then(data => {
+            maxstu = data['data'];
+
+            fetch('http://localhost:5000/class/listClass')
+            .then(response => response.json())
+            .then(dat => {
+                dat['data'].forEach(({Lop, SiSo}) => {            
+                    if(Lop === classInput.value)
+                    {
+                        console.log('max: '+maxstu[0].sobe);
+                        console.log(SiSo);
+                        if(maxstu[0].sobe <= SiSo)
+                        {
+                            console.log('true111');
+                            // return true;
+                            resolve(true);
+                        }
+                        else{
+                            console.log('false siso');
+                            // return false;
+                            resolve(false);
+                        }
+                    }
+                });
+            });
+        })
+    });
+    
+    return response;
+}
+
+
+
 function updateClassInfo(element) { // stuListContent
     const mahs = element.dataset.id;
     const index = element.dataset.index;
-    fetch('http://localhost:5000/class/' + mahs +'&'+ classInput.value, {
-        method: 'PATCH'
-    })
-    .then (response => response.json())
-    .then (data => {
-        if (data.success) {
-            stuListContent.rows[index].style.display = 'none';
-            addStuClass(element);
-        }
-        else {
-            console.log('failed to add student into class!');
-        }
-    })
+
+    console.log(isFullStudent());
+    if(isFullStudent() === true){
+        inform.innerHTML = "<p style='color:red;'>Lớp hiện tại đã đủ sĩ số!</p>";
+        setTimeout(function(){ inform.innerHTML="";}, 3000);
+        return false;
+    }
+    else{
+
+        fetch('http://localhost:5000/class/' + mahs +'&'+ classInput.value, {
+            method: 'PATCH'
+        })
+        .then (response => response.json())
+        .then (data => {
+            if (data.success) {
+                stuListContent.rows[index].style.display = 'none';
+                addStuClass(element);
+            }
+            else {
+                console.log('failed to add student into class!');
+            }
+        })
+    }
+
 }
 const container = document.querySelector('.container');
 const formBox = document.querySelector('#form-box');
@@ -232,3 +285,16 @@ function dispStuList() {
     })
     .catch(error => console.log(error));
 }
+
+
+let selectHtml = ""
+
+fetch('http://localhost:5000/class/listClass')
+.then(response => response.json())
+.then(data => {
+    data['data'].forEach(({Lop, SiSo}) => {            
+        selectHtml += `<option value=${Lop}>${Lop}</option>`;
+    });
+
+    classInput.innerHTML = selectHtml;
+})
