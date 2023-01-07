@@ -158,15 +158,9 @@ function FormValidated() {
             return false;
         }
     }
-    console.log(!isValidName(hoten.value))
     if (!isValidName(hoten.value)){
-        
-        // let splitName =  hoten.value.split(' ');
-        // for( let i=0; i<splitName.length; i++){
-        //     if(splitName[i][0]<='z' && splitName[i][0] >= )
-        // }
 
-        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ! Họ và tên cần viết hoa chữ cái đầu và không chứ kỹ tự đặc biệt!</p>";
+        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ! Họ và tên cần viết hoa chữ cái đầu và không chứa kỹ tự đặc biệt!</p>";
         return false;
     }
 
@@ -360,6 +354,14 @@ function update(event) {
     event.preventDefault();
     // lấy dữ liệu input
     editInfo = {MaHS: mahs.value, HoTen:hoten.value, GioiTinh: gtinh.value, NgaySinh: ngsinh.value, DiaChi: diachi.value, Email: email.value, Lop: lop.value};
+    
+    if (!FormValidated()) {
+        setTimeout(function(){ inform.innerHTML="";}, 3000);
+        return;
+    }
+    
+
+    
     for (let i in stuInfo) {
         if (stuInfo[i]===editInfo[i]) {
             delete editInfo[i];
