@@ -391,6 +391,7 @@ BEGIN
 	END IF;
 END ;;
 DELIMITER ;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE Doitenlop(IN TenLopCu char(10), IN TenLopMoi char(10))
 BEGIN
@@ -444,6 +445,7 @@ BEGIN
     select @message;
 END;;
 DELIMITER ;
+
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;

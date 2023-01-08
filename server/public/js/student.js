@@ -1,8 +1,7 @@
 let stuData=[];                 // danh sách tất cả học sinh
 let subData=[];
 let stuInfo=[];                 // thông tin chi tiết học sinh đang xét
-let editInfo=[];
-let age = [];                
+let editInfo=[];                
 let allowRefreshData = true;
 let loadingSubData = false;
 const inform = document.querySelector('#inform');
@@ -135,16 +134,11 @@ function isValidEmail(mail)
 
 function isValidBirthDay(birth)
 {
-    fetch('http://localhost:5000/rule/1')
-        .then(response => response.json())
-        .then(data => {
-            age = data['data'];
-        })
     const day = new Date();
     let year = day.getFullYear();
     let yearOfBirth = parseInt(ngsinh.value.split('-')[0]);
 
-    if(year- yearOfBirth < age[0]['sobe'] || year - yearOfBirth > age[0]['solon'])
+    if(year- yearOfBirth < 15 || year - yearOfBirth > 20)
     {
         return false
     }
@@ -158,9 +152,9 @@ function FormValidated() {
             return false;
         }
     }
+    console.log(!isValidName(hoten.value))
     if (!isValidName(hoten.value)){
-
-        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ! Họ và tên cần viết hoa chữ cái đầu và không chứa kỹ tự đặc biệt!</p>";
+        inform.innerHTML= "<p style='color:red;'>Tên không hợp lệ!</p>";
         return false;
     }
 
@@ -354,14 +348,6 @@ function update(event) {
     event.preventDefault();
     // lấy dữ liệu input
     editInfo = {MaHS: mahs.value, HoTen:hoten.value, GioiTinh: gtinh.value, NgaySinh: ngsinh.value, DiaChi: diachi.value, Email: email.value, Lop: lop.value};
-    
-    if (!FormValidated()) {
-        setTimeout(function(){ inform.innerHTML="";}, 3000);
-        return;
-    }
-    
-
-    
     for (let i in stuInfo) {
         if (stuInfo[i]===editInfo[i]) {
             delete editInfo[i];
@@ -416,17 +402,3 @@ function remove(mahs) {
         setTimeout(function(){ inform.innerHTML="";}, 3000);
     })
 }
-
-
-
-let selectHtml = ""
-
-fetch('http://localhost:5000/class/listClass')
-.then(response => response.json())
-.then(data => {
-    data['data'].forEach(({Lop, SiSo}) => {            
-        selectHtml += `<option value=${Lop}>${Lop}</option>`;
-    });
-
-    lop.innerHTML = selectHtml;
-})

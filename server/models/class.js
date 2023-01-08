@@ -53,26 +53,8 @@ const updateClassInfo = async(id, className) => {
         return false;
     }
 }
-
-const getName = async () => {
-    try {
-        const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM lophoc ;"
-            pool.query(query,[], (error, results) => {
-                if (error) reject(error);
-                resolve(results);
-            })
-        });
-        return response;
-    } catch(err) {
-        console.log(err);
-        return [];
-    }
-}
-
 module.exports = {
     getAll,
     stuList,
-    updateClassInfo,
-    getName
+    updateClassInfo
 }
