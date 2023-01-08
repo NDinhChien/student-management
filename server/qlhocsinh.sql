@@ -21,6 +21,23 @@ USE `qlhocsinh`;
 -- Table structure for table `dangnhap`
 --
 
+CREATE TABLE `quydinh` (
+  `stt` int UNSIGNED NOT NULL,
+  `sobe` int NOT NULL,
+  `solon` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `quydinh`
+--
+
+INSERT INTO `quydinh` (`stt`, `sobe`, `solon`) VALUES
+(1, 15, 20),
+(2, 30, 0),
+(5, 5, 0);
+COMMIT;
+
+
 DROP TABLE IF EXISTS `dangnhap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -377,17 +394,17 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE Doitenlop(IN TenLopCu char(10), IN TenLopMoi char(10))
 BEGIN
-	declare message nchar(100);
+	declare message int;
 	declare s int;
 	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLopMoi COLLATE utf8mb4_0900_ai_ci) > 0 THEN
-		set @message=concat('Đã tồn tại lớp"',TenLopMoi,'".');
+		set @message=0;
 	ELSE
 		START TRANSACTION;
         set @s=(select LopHoc.SiSo from LopHoc where LopHoc.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci);
 		insert LopHoc(Lop,SiSo) values(TenLopMoi,@s);
 		update HocSinh set Hocsinh.Lop=TenLopMoi where HocSinh.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci;
         delete from LopHoc where LopHoc.Lop=TenLopCu COLLATE utf8mb4_0900_ai_ci;
-		set @message='Đổi tên lớp thành công !';
+		set @message=1;
         COMMIT;
     END IF;
     select @message;
@@ -397,14 +414,14 @@ DELIMITER ;;
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE Them(IN TenLop char(10))
 BEGIN
-	declare message nchar(100);
+	declare message int;
 	declare s int;
 	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLop COLLATE utf8mb4_0900_ai_ci) > 0 THEN
-		set @message=concat('Đã tồn tại lớp "',TenLop,'".');
+		set @message=0;
 	ELSE
 		START TRANSACTION;
         insert lophoc values (TenLop,0);
-		set @message='Thêm lớp thành công !';
+		set @message=1;
         COMMIT;
     END IF;
     select @message;
@@ -413,15 +430,15 @@ DELIMITER ;;
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE Xoa(IN TenLop char(10))
 BEGIN
-	declare message nchar(100);
+	declare message int;
 	declare s int;
 	IF (SELECT COUNT(*) FROM LopHoc WHERE LopHoc.Lop = TenLop COLLATE utf8mb4_0900_ai_ci) = 0 THEN
-		set @message=concat('Chua ton tai lop "',TenLop,'".');
+		set @message=0;
 	ELSE
 		START TRANSACTION;
 		update HocSinh set Hocsinh.Lop=Null where HocSinh.Lop=TenLop COLLATE utf8mb4_0900_ai_ci;
         delete from LopHoc where LopHoc.Lop=TenLop COLLATE utf8mb4_0900_ai_ci;
-		set @message='Xóa lớp thành công !';
+		set @message=1;
         COMMIT;
     END IF;
     select @message;
