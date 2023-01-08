@@ -68,7 +68,7 @@ Nên anh muốn một ứng dụng:
 9. Mở file `dbConfig.js` trong thư mục `server/config`
 10. Đổi các thông tin về MySQL Database tương ứng với Database trên máy
 11. Mở `Terminal` và nhập: ```npm start```
-
+12. Mở browser và truy cập `http://localhost:5000/`
 
 
 ## 🚀 Deployment <a name = "deployment"></a>
